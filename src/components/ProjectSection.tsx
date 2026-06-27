@@ -1,0 +1,39 @@
+"use client";
+
+import ProjectCard from "./ProjectCard";
+import { projects } from "@/data/projects";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import ComingSoonCard from "./ComingSoonCard";
+import ComingSoonCardWide from "./ComingSoonCardWide";
+
+const ProjectSection = () => {
+  const isEven = projects.length % 2 === 0;
+
+  return (
+    <section id="projects" className="w-full space-y-6">
+      <div className="flex gap-3">
+        <p className="text-2xl font-light tracking-tight sm:text-3xl">
+          Projects
+        </p>
+      </div>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+        {projects.map((project) => (
+          <ProjectCard key={project.name} {...project} />
+        ))}
+        {isEven ? <ComingSoonCardWide /> : <ComingSoonCard />}
+      </div>
+      <div className="flex justify-center pt-6">
+        <Button asChild size="lg" className="text-base">
+          <Link href="/projects">
+            View all Projects
+            <ChevronRight strokeWidth={2.25} />
+          </Link>
+        </Button>
+      </div>
+    </section>
+  );
+};
+
+export default ProjectSection;
