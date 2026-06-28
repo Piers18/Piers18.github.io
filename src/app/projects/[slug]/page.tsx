@@ -7,10 +7,11 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ProjectDetailPage({
+export default async function ProjectDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  return <ProjectDetailClient slug={params.slug} />;
+  const { slug } = await params;
+  return <ProjectDetailClient slug={slug} />;
 }
